@@ -1,0 +1,34 @@
+<div class="container shadow mt-5">
+    <h1 class="text-center">List Of Villa</h1>
+    <div class="d-grid d-md-flex justify-content-md-end">
+    <a href="#" routerLink="/post/create/" class="btn btn-success ">Create New Villa</a>
+  </div>
+    <table class="table">
+        <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Details</th>
+                <th>Sqft</th>
+                <th>Occupancy</th>
+                <th>Rate</th>
+                <th width="250px">Action</th>
+              </tr>
+        </thead>
+        <tbody class="table-group-divider">
+              <tr *ngFor="let post of posts">
+                <td>{{ post.id }}</td>
+                <td>{{ post.name }}</td>
+                <td>{{ post.details }}</td>
+                <td>{{ post.sqft }}</td>
+                <td>{{ post.occupancy }}</td>
+                <td>{{ post.rate}}</td>
+                <td>
+                  <a href="#" [routerLink]="['/post/', post.id, 'view']" class="btn btn-info me-1">View</a>
+                  <a href="#" [routerLink]="['/post/', post.id, 'edit']" class="btn btn-primary me-1">Edit</a>
+                  <button type="button"  class="btn btn-danger">Delete</button>
+                </td>
+              </tr>
+        </tbody>
+    </table>
+ </div>
