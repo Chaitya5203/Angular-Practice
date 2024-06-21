@@ -25,8 +25,8 @@
                 <td>{{ post.rate}}</td>
                 <td>
                   <a href="#" [routerLink]="['/post/', post.id, 'view']" class="btn btn-info me-1">View</a>
-                  <a href="#" [routerLink]="['/post/', post.id, 'edit']" class="btn btn-primary me-1">Edit</a>
-                  <button type="button"  class="btn btn-danger">Delete</button>
+                  <a [routerLink]="['/post/', post.id, 'edit']" class="btn btn-primary me-1">Edit</a>
+                  <button type="button" class="btn btn-danger" (click)="deletePost(post.id)">Delete</button>
                 </td>
               </tr>
         </tbody>

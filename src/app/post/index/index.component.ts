@@ -20,10 +20,10 @@ export class IndexComponent {
       console.log(this.posts);
     })  
   }
-  // deletePost(id:number){
-  //   this.postService.delete(id).subscribe(res => {
-  //        this.posts = this.posts.filter(item => item.id !== id);
-  //        console.log('Post deleted successfully!');
-  //   })
-  // }
+  deletePost(id:number){
+    this.postService.delete(id).subscribe(res => {
+         this.posts = this.posts.filter(item => item.id !== id);
+         console.log('Villa deleted successfully!');
+    })
+  }
 }
