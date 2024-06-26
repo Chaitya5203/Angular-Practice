@@ -4,7 +4,6 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Post } from '../post';
 import { PostService } from '../post.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-
 @Component({
   selector: 'app-edit',
   standalone: true,

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import {  Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Post } from './post';
@@ -13,12 +13,14 @@ export class PostService {
       'Content-Type': 'application/json'
     })
   }
+  // ?pageIndex=2&pageSize=3
   constructor(private httpClient: HttpClient) { }
-  getAll(): Observable<any> {
-    return this.httpClient.get(this.apiURL)
-    .pipe(
-      catchError(this.errorHandler)
-    )
+  getAll(currentpage:number,pageSize: number): Observable<any> {
+    // const params = new HttpParams().set('page', currentpage.toString()).set('pageSize', pageSize.toString());
+    return this.httpClient.get<any>(`${this.apiURL}?pageIndex=${currentpage}&pageSize=${pageSize}`)
+      .pipe(
+        catchError(this.errorHandler)
+      );
   }
   delete(id:number){
     return this.httpClient.delete(this.apiURL +'/'+ id, this.httpOptions)
@@ -48,13 +50,21 @@ export class PostService {
       catchError(this.errorHandler)
     )
   }
+  searchPosts(query: string): Observable<any> {
+    const params = new HttpParams().set('query', query);
+    return this.httpClient.get<any>(`${this.apiURL}?pageIndex=${params}`, { params })
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
   errorHandler(error:any) {
-    let errorMessage = '';
-    if(error.error instanceof ErrorEvent) {
-      errorMessage = error.error.message;
-    } else {
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    return throwError(errorMessage);
+    // let errorMessage = '';
+    // if(error.error instanceof ErrorEvent) {
+    //   errorMessage = error.error.message;
+    // } else {
+    //   errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    // }
+    // return throwError(errorMessage);"
+    return "";
  }
 }

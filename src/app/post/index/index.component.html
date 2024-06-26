@@ -1,34 +1,57 @@
 <div class="container shadow mt-5">
-    <h1 class="text-center">List Of Villa</h1>
-    <div class="d-grid d-md-flex justify-content-md-end">
+  <h1 class="text-center">{{title1 | titlecase}}</h1>
+  <div class="d-grid d-md-flex justify-content-md-end">
     <a href="#" routerLink="/post/create/" class="btn btn-success ">Create New Villa</a>
   </div>
-    <table class="table">
-        <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Details</th>
-                <th>Sqft</th>
-                <th>Occupancy</th>
-                <th>Rate</th>
-                <th width="250px">Action</th>
-              </tr>
-        </thead>
-        <tbody class="table-group-divider">
-              <tr *ngFor="let post of posts">
-                <td>{{ post.id }}</td>
-                <td>{{ post.name }}</td>
-                <td>{{ post.details }}</td>
-                <td>{{ post.sqft }}</td>
-                <td>{{ post.occupancy }}</td>
-                <td>{{ post.rate}}</td>
-                <td>
-                  <a href="#" [routerLink]="['/post/', post.id, 'view']" class="btn btn-info me-1">View</a>
-                  <a [routerLink]="['/post/', post.id, 'edit']" class="btn btn-primary me-1">Edit</a>
-                  <button type="button" class="btn btn-danger" (click)="deletePost(post.id)">Delete</button>
-                </td>
-              </tr>
-        </tbody>
-    </table>
- </div>
+  <!-- post-list.component.html -->
+
+<div class="container">
+  <div class="form-group mt-2">
+    <input type="text" class="form-control" id="searchQuery" [(ngModel)]="searchQuery" (input)="searchPosts()">
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Index</th>
+        <th>Name</th>
+        <th>Details</th>
+        <th>Sqft</th>
+        <th>Occupancy</th>
+        <th>Rate</th>
+        <th width="250px">Action</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <tr *ngFor="let post of posts,let index = index">
+        <td>{{index+1}}</td>
+        <td>{{ post.name | uppercase }}</td>
+        <td>{{ post.details | lowercase}}</td>
+        <td>{{ post.sqft }}</td>
+        <td>{{ post.occupancy }}</td>
+        <td>{{ post.rate | currency :'INR' :true:'2.2-5'}}</td>
+        <td>
+          <a href="#" [routerLink]="['/post/', post.id, 'view']" class="btn btn-info me-1">View</a>
+          <a [routerLink]="['/post/', post.id, 'edit']" class="btn btn-primary me-1">Edit</a>
+          <button type="button" class="btn btn-danger" (click)="deletePost(post.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div aria-label="Page navigation pb-5">
+  <ul class="pagination justify-content-center mt-3 pb-3">
+    <li class="page-item" [class.disabled]="!ispreviouspage">
+      <a class="page-link" href="javascript:void(0)" aria-label="Previous" (click)="previousPage()">
+        <span aria-hidden="true">&lt;</span>
+      </a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" href="javascript:void(0)">{{ currentpage }}</a>
+    </li>
+    <li class="page-item" [class.disabled]="!isnextPage">
+      <a class="page-link" href="javascript:void(0)" aria-label="Next" (click)="nextPage()">
+        <span aria-hidden="true">&gt;</span>
+      </a>
+    </li>
+  </ul>
+</div>
