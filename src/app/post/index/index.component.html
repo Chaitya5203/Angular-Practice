@@ -32,14 +32,15 @@
         <td>
           <a href="#" [routerLink]="['/post/', post.id, 'view']" class="btn btn-info me-1">View</a>
           <a [routerLink]="['/post/', post.id, 'edit']" class="btn btn-primary me-1">Edit</a>
-          <button type="button" class="btn btn-danger" (click)="deletePost(post.id)">Delete</button>
+          <button type="button" class="btn btn-danger" (click)="openModal()">Delete</button>
+          <!-- value=post.id (click)="deletePost(post.id)"(click)="deletePost(post.id)" -->
         </td>
       </tr>
     </tbody>
   </table>
 </div>
-<div aria-label="Page navigation pb-5">
-  <ul class="pagination justify-content-center mt-3 pb-3">
+<div aria-label="Page navigation mb-1">
+  <ul class="pagination justify-content-center mt-3">
     <li class="page-item" [class.disabled]="!ispreviouspage">
       <a class="page-link" href="javascript:void(0)" aria-label="Previous" (click)="previousPage()">
         <span aria-hidden="true">&lt;</span>
@@ -55,3 +56,15 @@
     </li>
   </ul>
 </div>
+<label for="">Showing Items Per Page</label>
+<button class="btn " type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <select class="form-control ml-3 " (change)="Onpagechange($event)">
+    <option value=5 selected>5</option>
+    <option value=6>6</option>
+    <option value=7>7</option>
+    <option value=9>9</option>
+    <option value=15>15</option>
+    <option value=20>20</option>
+    <option value=25>25</option>
+  </select>
+</button>

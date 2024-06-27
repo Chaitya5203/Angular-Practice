@@ -13,10 +13,8 @@ export class PostService {
       'Content-Type': 'application/json'
     })
   }
-  // ?pageIndex=2&pageSize=3
   constructor(private httpClient: HttpClient) { }
   getAll(currentpage:number,pageSize: number): Observable<any> {
-    // const params = new HttpParams().set('page', currentpage.toString()).set('pageSize', pageSize.toString());
     return this.httpClient.get<any>(`${this.apiURL}?pageIndex=${currentpage}&pageSize=${pageSize}`)
       .pipe(
         catchError(this.errorHandler)

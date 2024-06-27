@@ -4,18 +4,18 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Post } from '../post';
 import { PostService } from '../post.service';
-
+import { ToasterService } from '../../toaster.service';
 @Component({
   selector: 'app-create',
   standalone: true,
-  imports: [CommonModule, RouterModule,ReactiveFormsModule],
+  imports: [CommonModule, RouterModule,ReactiveFormsModule ],
   templateUrl: './create.component.html',
   styleUrl: './create.component.css'
 })
 export class CreateComponent {
   post!: Post;
   form!: FormGroup;
-  constructor(public postService: PostService,private route: ActivatedRoute,
+  constructor(public postService: PostService,private route: ActivatedRoute,private toasterService: ToasterService,
   private router: Router) { }
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -34,6 +34,7 @@ export class CreateComponent {
     this.postService.create(this.form.value).subscribe((res: any) => {
       console.log('Villa Created successfully!');
       this.router.navigateByUrl('post/index');
+      this.toasterService.showSuccess('Villa Created successfully!', 'Success');
     })
   }
 }
