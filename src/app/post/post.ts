@@ -5,4 +5,5 @@ export interface Post {
     sqft:number;
     occupancy:number;
     rate:number;
+    amenity:string;
 }

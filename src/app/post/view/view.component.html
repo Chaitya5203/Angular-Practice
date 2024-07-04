@@ -3,24 +3,30 @@
     <div class="d-grid d-md-flex justify-content-md-end">
         <a href="#" routerLink="/post/index" class="btn btn-primary text-end">Back</a>
     </div>
-    <div>
-        <strong>Name:</strong>
-        <p>{{ post.name }}</p>
-    </div>
-    <div>
-        <strong>Sqft:</strong>
-        <p>{{post.sqft}}</p>
-    </div>
-    <div>
-        <strong>Occupancy:</strong>
-        <p>{{post.occupancy}}</p>
-    </div>
-    <div>
-        <strong>Rate:</strong>
-        <p>{{post.rate}}</p>
-    </div>
-    <div>
-        <strong>Details:</strong>
-        <p>{{ post.details }}</p>
-    </div>
+    @if (post!=null) {
+        <div>
+            <strong>Name:</strong>
+            <p>{{post.name}}</p>
+        </div>
+        <div>
+            <strong>Sqft:</strong>
+            <p>{{post.sqft}}</p>
+        </div>
+        <div>
+            <strong>Occupancy:</strong>
+            <p>{{post.occupancy}}</p>
+        </div>
+        <div>
+            <strong>Rate:</strong>
+            <p>{{post.rate}}</p>
+        </div>
+        <div>
+            <strong>Details:</strong>
+            <p>{{post.details}}</p>
+        </div>
+        <div>
+            <strong>Amenity:</strong>
+            <p>{{post.amenity}}</p>
+        </div>
+    }
 </div>

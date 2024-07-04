@@ -11,18 +11,17 @@ import { PostService } from '../post.service';
   templateUrl: './view.component.html',
   styleUrl: './view.component.css'
 })
-export class ViewComponent {
+export class ViewComponent {  
   id!: number;
   post!: Post;
   constructor(
     public postService: PostService,
     private route: ActivatedRoute,
-    private router: Router
    ) { }
    ngOnInit(): void {
     this.id = this.route.snapshot.params['postId'];
     this.postService.find(this.id).subscribe((data)=>{
-      this.post = data.result;
+      this.post = data.data;
       console.log(this.post);
     });
   }

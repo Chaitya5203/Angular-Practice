@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Post } from '../post';
 import { PostService } from '../post.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ToasterService } from '../../toaster.service';
 @Component({
   selector: 'app-edit',
   standalone: true,
@@ -11,19 +12,20 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.css'
 })
-export class EditComponent {
+export class  EditComponent {
   id!: number;
   post!: Post;
   form!: FormGroup;
   constructor(
     public postService: PostService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private toasterService: ToasterService
   ) { }
   ngOnInit(): void {
     this.id = this.route.snapshot.params['postId'];
     this.postService.find(this.id).subscribe((data) => {
-      this.post = data.result;
+      this.post = data.data;
       console.log(this.post);
       this.form = new FormGroup({
         details: new FormControl(this.post.details, Validators.required),
@@ -31,6 +33,7 @@ export class EditComponent {
         name: new FormControl(this.post.name,Validators.required),
         occupancy : new FormControl(this.post.occupancy,Validators.required),
         rate : new FormControl(this.post.rate,Validators.required),
+        amenity: new FormControl(this.post.amenity,Validators.required)
       });
     });
   }
@@ -43,6 +46,7 @@ export class EditComponent {
     this.postService.update(this.id, this.form.value).subscribe((res: any) => {
       console.log('Villa updated successfully!');
       this.router.navigateByUrl('post/index');
+      this.toasterService.showSuccess('Villa updated successfully!', 'Success');
     })
   }
 }

@@ -23,7 +23,8 @@ export class CreateComponent {
       details: new FormControl('', Validators.required),
       sqft: new FormControl('', Validators.required),
       occupancy: new FormControl('', Validators.required),
-      rate: new FormControl('', Validators.required)
+      rate: new FormControl('', Validators.required),
+      amenity:new FormControl('',Validators.required)
     });
   }
   get f() {

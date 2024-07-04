@@ -7,7 +7,7 @@ import { Post } from './post';
   providedIn: 'root'
 })
 export class PostService {
-  private apiURL = "https://localhost:7197/api/VillaAPI";
+  private apiURL = "https://localhost:7197/api/VillaAPI/villa";
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -15,7 +15,7 @@ export class PostService {
   }
   constructor(private httpClient: HttpClient) { }
   getAll(currentpage:number,pageSize: number): Observable<any> {
-    return this.httpClient.get<any>(`${this.apiURL}?pageIndex=${currentpage}&pageSize=${pageSize}`)
+    return this.httpClient.get<any>(`${this.apiURL}/?pageIndex=${currentpage}&pageSize=${pageSize}`)
       .pipe(
         catchError(this.errorHandler)
       );
@@ -48,9 +48,8 @@ export class PostService {
       catchError(this.errorHandler)
     )
   }
-  searchPosts(query: string): Observable<any> {
-    const params = new HttpParams().set('query', query);
-    return this.httpClient.get<any>(`${this.apiURL}?pageIndex=${params}`, { params })
+  searchPosts(currentpage:number,pageSize: number,query: string): Observable<any> {
+    return this.httpClient.get<any>(`${this.apiURL}?pageIndex=${currentpage}&pageSize=${pageSize}&search=${query}`)
       .pipe(
         catchError(this.errorHandler)
       );

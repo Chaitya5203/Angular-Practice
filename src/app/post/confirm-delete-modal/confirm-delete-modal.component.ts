@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, ViewChild, asNativeElements, viewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild, asNativeElements, viewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 declare var $: any;
 @Component({
@@ -10,11 +10,14 @@ declare var $: any;
   styleUrl: './confirm-delete-modal.component.css'
 })
 export class ConfirmDeleteModalComponent {
-  @ViewChild('modal') modal?:ElementRef;
-  openModel(){
-    $(this.modal?.nativeElement).modal('show');
-  }
+  @Input() id: any;
+  @Output() deletePost: EventEmitter<any> = new EventEmitter<any>();
   closeModal() {
-    $(this.modal?.nativeElement).modal('hide');
+    $("#exampleModalCenter").modal('hide');
+  }
+  deletePostChild(id:any){
+    console.log(id)
+    this.deletePost.emit(this.id);
+    $('#exampleModalCenter').modal('hide');
   }
 }
