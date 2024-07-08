@@ -3,6 +3,7 @@ import { Post } from '../post';
 import { PostService } from '../post.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { ToasterService } from '../../toaster.service';
@@ -25,7 +26,7 @@ export class IndexComponent {
   searchQuery: string = '';
   posts: Post[] = [];
   modalItemId: any;
-  constructor(public postService: PostService,private toasterService: ToasterService) { }
+  constructor(private router: Router,public postService: PostService,private toasterService: ToasterService) { }
   ngOnInit(): void {
     this.totalpage=1;
     this.pagesize = 5;
@@ -86,5 +87,9 @@ export class IndexComponent {
     this.modalItemId = id;
     console.log(id);
     $("#exampleModalCenter").modal('show');
+  }
+  logout(){
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
 }

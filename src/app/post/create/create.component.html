@@ -7,30 +7,46 @@
         <div class="form-group">
             <label for="name">Name:</label>
             <input formControlName="name" id="name" type="text" class="form-control">
-        </div>
+            <div class="text-danger" *ngIf="form.controls['name'].touched && !form.controls['name'].valid">
+                First Name Is required!!!
+            </div>
+        </div>        
         <div class="form-group">
             <label for="details">Details:</label>
             <input formControlName="details" id="details" type="text" class="form-control">
+            <div class="text-danger" *ngIf="form.controls['details'].touched && !form.controls['details'].valid">
+                Villa Details Is required!!!
+            </div>
         </div>
         <div class="form-group">
             <label for="sqft">Sqft:</label>
-            <input formControlName="sqft" id="sqft" type="text" class="form-control">
+            <input formControlName="sqft" id="sqft" type="number" class="form-control">
+            <div class="text-danger" *ngIf="form.controls['sqft'].touched && !form.controls['sqft'].valid">
+                Sqft Details Is required!!!
+            </div>
         </div>
         <div class="form-group">
             <label for="occupancy">Occupancy:</label>
-            <input formControlName="occupancy" id="occupancy" type="text" class="form-control">
+            <input formControlName="occupancy" id="occupancy" type="number" class="form-control">
+            <div class="text-danger" *ngIf="form.controls['occupancy'].touched && !form.controls['occupancy'].valid">
+                occupancy required!!!
+            </div>
         </div>
         <div class="form-group">
             <label for="rate">Rate:</label>
-            <input formControlName="rate" id="rate" type="text" class="form-control">
+            <input formControlName="rate" id="rate" type="number" class="form-control"><div class="text-danger" *ngIf="form.controls['rate'].touched && !form.controls['rate'].valid">
+                Villa rate Is required!!!
+            </div>
         </div>
         <div class="form-group">
             <label for="amenity">Amenity:</label>
             <input formControlName="amenity" id="amenity" type="text" class="form-control">
+            <div class="text-danger" *ngIf="form.controls['amenity'].touched && !form.controls['amenity'].valid">
+                amenity required!!!
+            </div>
         </div>
         <div class="d-md-flex justify-content-md-end">
-            <button class="btn btn-primary mt-3 mb-3" type="submit"
-            [disabled]="!form.valid">Create</button>
+            <button class="btn btn-primary mt-3 mb-3" type="submit">Create</button>
         </div>
     </form>
 </div>

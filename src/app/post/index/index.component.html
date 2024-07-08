@@ -1,7 +1,8 @@
 <div class="container shadow mt-5">
   <h1 class="text-center">{{title1 | titlecase}}</h1>
   <div class="d-grid d-md-flex justify-content-md-end">
-    <a href="#" routerLink="/post/create/" class="btn btn-success ">Create New Villa</a>
+    <a href="#" routerLink="/post/create/" class="btn btn-success me-2">Create New Villa</a>
+    <a href="#" (click)="logout()" class="btn btn-danger">Logout</a>
   </div>
   <!-- post-list.component.html -->
 
@@ -9,38 +10,40 @@
   <div class="form-group mt-2">
     <input type="text" class="form-control" id="searchQuery" [(ngModel)]="searchQuery" (input)="searchPosts()">
   </div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Index</th>
-        <th>Name</th>
-        <th>Details</th>
-        <th>Sqft</th>
-        <th>Occupancy</th>
-        <th>Rate</th>
-        <th>Amenity</th>
-        <th width="250px">Action</th>
-      </tr>
-    </thead>
-    <tbody class="table-group-divider">
-      <tr *ngFor="let post of posts,let index = index">
-        <td>{{(currentpage * pagesize)-pagesize+(index+1)}}</td>
-        <td>{{ post.name | uppercase }}</td>
-        <td>{{ post.details | lowercase}}</td>
-        <td>{{ post.sqft }}</td>
-        <td>{{ post.occupancy }}</td>
-        <td>{{ post.rate | currency :'INR' :true:'2.2-5'}}</td>
-        <td>{{post.amenity}}</td>
-        <td>
-          <a href="#" [routerLink]="['/post/', post.id, 'view']" class="btn btn-info me-1">View</a>
-          <a [routerLink]="['/post/', post.id, 'edit']" class="btn btn-primary me-1">Edit</a>
-          <!-- <button type="button" class="btn btn-danger" (click)="deletePost(post.id)" >Delete</button> -->
-          <button type="button" class="btn btn-danger" (click)="openModal(post.id)" >Delete</button>
-          <!-- value=post.id (click)="deletePost(post.id)"(click)="openModal()" -->
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Index</th>
+          <th>Name</th>
+          <th>Details</th>
+          <th>Sqft</th>
+          <th>Occupancy</th>
+          <th>Rate</th>
+          <th>Amenity</th>
+          <th width="250px">Action</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr *ngFor="let post of posts,let index = index">
+          <td>{{(currentpage * pagesize)-pagesize+(index+1)}}</td>
+          <td>{{ post.name | uppercase }}</td>
+          <td>{{ post.details | lowercase}}</td>
+          <td>{{ post.sqft }}</td>
+          <td>{{ post.occupancy }}</td>
+          <td>{{ post.rate | currency :'INR' :true:'2.2-5'}}</td>
+          <td>{{post.amenity}}</td>
+          <td>
+            <a href="#" [routerLink]="['/post/', post.id, 'view']" class="btn btn-info me-1">View</a>
+            <a [routerLink]="['/post/', post.id, 'edit']" class="btn btn-primary me-1">Edit</a>
+            <!-- <button type="button" class="btn btn-danger" (click)="deletePost(post.id)" >Delete</button> -->
+            <button type="button" class="btn btn-danger" (click)="openModal(post.id)" >Delete</button>
+            <!-- value=post.id (click)="deletePost(post.id)"(click)="openModal()" -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 <div aria-label="Page navigation mb-1">
   <ul class="pagination justify-content-center mt-3">
